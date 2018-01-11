@@ -31,12 +31,14 @@ def normalConvert():
 		os.rename(os.path.join(BOOKPATH,dirname), os.path.join(BOOKPATH,newname))
 		for image in sorted_aphanumeric(os.listdir(os.path.join(BOOKPATH,newname))):
 			if ".jpg" in image or ".png" in image or ".JPEG" in image:
-				imagePath = BOOKPATH+"/"+dirname+"/"+image
+				imagePath = BOOKPATH+"/"+newname+"/"+image
 				pdf.add_page()
 				print imagePath
 				pdf.image(imagePath,x=0, y=0, w=pdf.w, h=pdf.h)
 		
 		pdf.output(RESULTPATH+"/"+dirname+".pdf", "F")
+		pdf.close()
+		
 		print RESULTPATH+"/"+dirname+".pdf"+" generated."
 
 	print "Done"
@@ -59,7 +61,7 @@ def makeBookConvert():
 		
 		for image in sorted_aphanumeric(os.listdir(bookPath)):
 			if ".jpg" in image or ".png" in image or ".JPEG" in image:
-				imagePath = BOOKPATH+"/"+dirname+"/"+image
+				imagePath = BOOKPATH+"/"+newname+"/"+image
 				imageCount = imageCount + 1
 				imageArr.append(imagePath)
 								
@@ -80,6 +82,7 @@ def makeBookConvert():
 			pdf.image(image,x=0, y=0, w=pdf.w, h=pdf.h)
 		
 		#pdf.output(RESULTPATH+"/"+item+".pdf", "F")
+		pdf.close()
 		print RESULTPATH+"/"+item+".pdf"+" generated."
 		
 if TYPE == "1":
